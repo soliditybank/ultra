@@ -4,11 +4,11 @@ Military-grade security for your onchain transactions.
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer):
 Step 1. git clone https://github.com/soliditybank/ultra.git
 
-Step 2. Open the '/ultra.html' file on a browser offline.
+Step 2. Open the '/keygen.html' file on a browser offline, and generate your - truly random - private key.
 
-Step 3. Generate your - truly random - private key. Other options available.
+Step 3. Open the '/new-wallet.html' file and paste the private key or choose another option to create your new wallet. This wallet is stored locally in your browser and will be used any time you sign a transaction.
 
-Step 4. Fill the transaction details and sign it. A QR of the signature is generated.
+Step 4. Open the '/ultra.html' file, fill the transaction details and sign it with one of your stored wallets. A QR of the signature is generated.
 
 ## IMPORTANT
 Your address must be funded with enough Ether to cover the transaction fee.
