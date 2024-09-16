@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Solidity Bank - True Random Key Generator</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+<meta name="description" content="Generate private keys for Bitcoin and Ethereum. True Random Generator.">
+
+<script>
+if (location.protocol != "https:" || location.host != "soliditybank.com") {
+	window.location.replace("https://soliditybank.com/account");
+}
+</script>
+
+<style rel="stylesheet" type="text/css">
+body {
+	margin:0;
+	font-family:monospace;
+	background-color:#eee;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+header {
+	position:relative;
+	width:100%;
+	background-color:#000;
+	color:#fff;
+	text-align:center;
+}
+header h1 {
+	margin:0;
+	padding:10px;
+	font-size: 1.2rem;
+}
+nav {
+	padding: 10px;
+	font-size: 0.9rem;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center;
+}
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 50px;
+}
+footer {
+	position: fixed;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 30px;
+	bottom: 0;
+	background-color: #000;
+	color: #eee;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 0.9rem;
+}
+footer > span {
+	width: 150px;
+	text-align: center;
+}
+footer > span > a {
+	text-decoration: none;
+	color: #fff;
+}
+footer > span > a:hover {
+	text-decoration: underline;
+}
+.box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 600px;
+	padding: 5px 10px;
+	margin: 5px 0;
+	background-color: #f8f8f8;
+	border-radius: 10px;
+}
+.box > span {
+	margin: 5px 0;
+}
+.box > span:nth-child(1) {
+	font-size: 0.9rem;
+	font-family: sans-serif;
+}
+.box > span:nth-child(2) {
+	display: block;
+	overflow: auto;
+	width: 300px;
+	text-align: center;
+}
+.copy {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	width: 200px;
+	height: 30px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	font-family: sans-serif;
+}
+.copy:hover {
+	background-color: #ddd;
+}
+#container {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+}
+#counter {
+	border: 0;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	font-family: monospace;
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+}
+#hex {
+	position:relative;
+	width:100%;
+	background-color:#555;
+	max-width: 600px;
+	margin-top: 5px;
+}
+#hex table {
+	width:100%;
+}
+#hex td {
+	width:25%;
+	height: 40px;
+	text-align:center;
+	border:1px solid #000;
+	background-color:#ddd;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+#hex td:hover {
+	background-color: #ccc;
+}
+
+#key {
+	position:relative;
+	width:100%;
+	margin-bottom:10px;
+	background-color:#900;
+	color:#fff;
+	font-family:monospace;
+	font-size: 0.8rem;
+	text-align:center;
+}
+#key > p {
+	overflow: auto;
+	padding: 0 10px;
+}
+#key > button {
+	border: 1px solid #ccc;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: sans-serif;
+}
+#key > button:hover {
+	background-color: #ccc;
+}
+#keygen {
+	text-align:center;
+	width:100%;
+}
+#noscript {
+	display:block;
+	background-color:#f00;
+	color:#fff;
+	width:100%;
+	text-align:center;
+}
+</style>
+</head>
+<body>
+<noscript id="noscript">JavaScript has been disabled in your browser.</noscript>
+<header>
+<h1>True Random Key Generator</h1>
+</header>
+<nav>Click or tap over the characters until it's green. Then <b>confirm</b> to generate the public key and addresses for Bitcoin and Ethereum.</nav>
+<main>
+<div id="key">
+<p>0x<span type="text" id="keygen"></span></p>
+<input id="counter" value="0/64" readonly>
+<button id="confirm_btn" disabled>Confirm</button>
+<button onclick="start_again()">Start again</button>
+</div>
+<div id="hex">
+<table>
+<tr>
+<td onclick="add('A')">A</td>
+<td onclick="add('0')">0</td>
+<td onclick="add('9')">9</td>
+<td onclick="add('B')">B</td>
+</tr>
+<tr>
+<td onclick="add('1')">1</td>
+<td onclick="add('8')">8</td>
+<td onclick="add('C')">C</td>
+<td onclick="add('2')">2</td>
+</tr>
+<tr>
+<td onclick="add('7')">7</td>
+<td onclick="add('D')">D</td>
+<td onclick="add('3')">3</td>
+<td onclick="add('6')">6</td>
+</tr>
+<tr>
+<td onclick="add('E')">E</td>
+<td onclick="add('4')">4</td>
+<td onclick="add('5')">5</td>
+<td onclick="add('F')">F</td>
+</tr>
+</table>
+</div>
+<div id="container">
+<div class="box">
+<span>Private Key</span>
+<span id="private_key"></span>
+<span id="copy_private_key" class="copy">Copy Private Key</span>
+</div>
+<div class="box">
+<span>Public Key (uncompressed)</span>
+<span id="public_key"></span>
+<span id="copy_pubkey" class="copy">Copy Public Key</span>
+</div>
+<div class="box">
+<span>Bitcoin address</span>
+<span id="bitcoin_address"></span>
+<span id="copy_btc_address" class="copy">Copy Bitcoin Address</span>
+</div>
+<div class="box">
+<span>Ethereum address</span>
+<span id="ethereum_address"></span>
+<span id="copy_eth_address" class="copy">Copy Ethereum Address</span>
+</div>
+</div>
+</main>
+<footer>
+<span>&copy; Solidity Bank</span>
+<span><a href="/index.html">Homepage</a></span>
+</footer>
+
+<script>
+let key = [];
+let i = 0;
+function add(a) {
+	key[i%64]=a;
+	i+=1;
+	if (key.length>=64) {
+	document.getElementById("key").style.backgroundColor = "#090";
+	document.getElementById("confirm_btn").removeAttribute('disabled');
+	} else {
+	document.getElementById("key").style.backgroundColor = "#900";
+	}
+	if (i<=64) {
+		document.getElementById("counter").value = i + "/64";
+	}
+	document.getElementById("keygen").innerHTML = key.join("");
+}
+
+function start_again() {
+	window.location.reload();
+}
+</script>
+
+<script type="module">
+import { ethers } from "/js/ethers.min.js";
+
+let confirm_btn = document.getElementById("confirm_btn");
+confirm_btn.addEventListener("click", confirm);
+
+function confirm() {
+	document.getElementById("hex").style.display = "none";
+	let private_key = "0x" + document.getElementById("keygen").innerHTML;
+	document.getElementById("private_key").innerHTML = private_key;
+	document.getElementById("container").style.display = "flex";
+	
+	// STEP 0: Private ECDSA Key
+	let signingKey = new ethers.SigningKey(private_key);
+
+	// STEP 1: Public ECDSA Key
+	let public_key = signingKey.publicKey;
+	document.getElementById("public_key").innerHTML = public_key;
+
+	// BITCOIN ADDRESS GENERATOR
+
+	// STEP 2: SHA-256 hash of 1
+	let hash = ethers.sha256(public_key);
+
+	// STEP 3: RIPEMD-160 Hash of 2
+	hash = ethers.ripemd160(hash);
+
+	// STEP 4: Adding network bytes to 3
+	let hash_4 = "0x00" + hash.slice(2);
+
+	// STEP 5: SHA-256 hash of 4
+	hash = ethers.sha256(hash_4);
+
+	// STEP 6: SHA-256 hash of 5
+	hash = ethers.sha256(hash);
+
+	// STEP 7: First four bytes of 6
+	let four_bytes = hash.slice(2, 10);
+
+	// STEP 8: Adding 7 at the end of 4
+	hash = hash_4 + four_bytes;
+
+	// STEP 9: Base58 encoding of 8
+	let bitcoin_address = ethers.encodeBase58(hash);
+	document.getElementById("bitcoin_address").innerHTML = bitcoin_address;
+
+	// ETHEREUM ADDRESS GENERATOR
+	
+	// Get address from private key
+	let ethereum_address_from_private_key = ethers.computeAddress(private_key);
+	document.getElementById("ethereum_address").innerHTML = ethereum_address_from_private_key;
+
+	// Get address from public key
+	let ethereum_address_from_public_key = ethers.computeAddress(public_key);
+	
+	// Copy Private Key
+	let copy_private_key_btn = document.getElementById("copy_private_key");
+	copy_private_key_btn.addEventListener("click", copy_private_key);
+	function copy_private_key() {
+		navigator.clipboard.writeText(private_key);
+		alert("Private Key has been copied to clipboard. Keep it safe.");
+	}
+	
+	// Copy Public Key
+	let copy_pubkey_btn = document.getElementById("copy_pubkey");
+	copy_pubkey_btn.addEventListener("click", copy_pubkey);
+	function copy_pubkey() {
+		let copyText = document.getElementById("copy_pubkey");
+		navigator.clipboard.writeText(public_key);
+		alert("Public Key has been copied to clipboard.");
+	}
+	
+	// Copy Bitcoin Address
+	let copy_btc_address_btn = document.getElementById("copy_btc_address");
+	copy_btc_address_btn.addEventListener("click", copy_btc_address);
+	function copy_btc_address() {
+		let copyText = document.getElementById("copy_btc_address");
+		navigator.clipboard.writeText(bitcoin_address);
+		alert("Bitcoin address has been copied to clipboard.");
+	}
+	
+	// Copy Ethereum Address
+	let copy_eth_address_btn = document.getElementById("copy_eth_address");
+	copy_eth_address_btn.addEventListener("click", copy_eth_address);
+	function copy_eth_address() {
+		let copyText = document.getElementById("copy_eth_address");
+		navigator.clipboard.writeText(ethereum_address_from_private_key);
+		alert("Ethereum address has been copied to clipboard.");
+	}
+}
+</script>
+</body>
+</html>
