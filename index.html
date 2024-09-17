@@ -1,7 +1,15 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+  <title>Solidity Bank - Ultra</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+  <meta name="description" content="Offline webapp for signing onchain transactions">
     <style>
+      body {
+        margin: 0;
+      }
       main {
         display: flex;
         flex-direction: column;
@@ -11,8 +19,8 @@
   <body>
     <main>
       <a href="keygen.html">Key Generator</a>
-      <a href="wallet.html"></a>
-      <a href="sign.html"></a>
+      <a href="wallet.html">Create a new wallet</a>
+      <a href="sign.html">Sign a transaction</a>
     </main>
     <script type="module">
       import { ethers } from "lib/ethers.min.js";
