@@ -2,7 +2,10 @@
 Military-grade security for your onchain transactions.
 
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer):
-Step 1. git clone https://github.com/soliditybank/ultra.git
+Step 1. A local web server is needed to run the web application.
+  - git clone https://github.com/soliditybank/ultra.git
+  - move files to the web server folder.
+  - run the server and open localhost:<port> in the browser
 
 Step 2. Open the 'index.html' file on a browser offline. Choose an action:
 
