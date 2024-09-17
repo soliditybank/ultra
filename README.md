@@ -8,7 +8,7 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
 
   - 'keygen.html' generates a - truly random - private key and its address.
 
-  - 'new-wallet.html' creates a new wallet and stores it locally in your browser.file and paste the private key or choose another option to create your new wallet. This wallet is stored locally in your browser and will be used any time you sign a transaction.
+  - 'wallet.html' creates a new wallet and stores it locally in your browser.file and paste the private key or choose another option to create your new wallet. This wallet is stored locally in your browser and will be used any time you sign a transaction.
 
   - 'sign.html' creates and sign a transaction. A QR of the signature is generated.
 
