@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr" lang="en">
 <head>
-  
+<title>Solidity Bank Ultra - Sign transaction</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <body>
-  
+<div id="qr_signature">
+<img id="qr_img" width="300" height="300" alt="QR">
+<span>Scan the QR to share the signature :</span>
+<code id="signature"></code>
+</div>
+<script src="lib/qr_packed.js"></script>
+<script type="module">
+import { ethers } from "/lib/ethers.min.js";
+
+</script>
 </body> 
 </html>
