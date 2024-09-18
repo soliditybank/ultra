@@ -14,7 +14,9 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
 
 ### How to start a server
   $ mkdir soliditybank
+  
   $ cd soliditybank
+  
   $ git clone https://github.com/soliditybank/ultra.git
 
 **NODEJS**
@@ -22,11 +24,14 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
 
 **PYTHON**
   $ cd /path/to/soliditybank/ultra
+  
   $ python3 -m http.server 9999
+  
   // On Windows, try "python -m http.server" or "py -3 -m http.server"
 
   **PHP**
   $ cd /path/to/soliditybank/ultra
+  
   $ php -S localhost:9999
 
 ## IMPORTANT
