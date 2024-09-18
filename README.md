@@ -12,6 +12,23 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
   - 'wallet.html' offers various ways to create a new wallet. This wallet is stored locally in your browser and will be used any time you sign a transaction.
   - 'sign.html' creates and signs a transaction with your stored wallet. A QR of the signature is generated.
 
+### How to start a server
+  $ mkdir soliditybank
+  $ cd soliditybank
+  $ git clone https://github.com/soliditybank/ultra.git
+
+**NODEJS**
+  $ npx http-server /path/to/soliditybank/ultra -o -p 9999
+
+**PYTHON**
+  $ cd /path/to/soliditybank/ultra
+  $ python3 -m http.server 9999
+  // On Windows, try "python -m http.server" or "py -3 -m http.server"
+
+  **PHP**
+  $ cd /path/to/soliditybank/ultra
+  $ php -S localhost:9999
+
 ## IMPORTANT
 Your address must be funded with enough Ether to cover the transaction fee.
 
