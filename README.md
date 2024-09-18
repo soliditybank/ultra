@@ -13,16 +13,16 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
   - 'sign.html' creates and signs a transaction with your stored wallet. A QR of the signature is generated.
 
 ### How to start a server
-  $ mkdir soliditybank
-  
-  $ cd soliditybank
+  $ mkdir soliditybank && cd soliditybank
   
   $ git clone https://github.com/soliditybank/ultra.git
 
 **NODEJS**
+
   $ npx http-server /path/to/soliditybank/ultra -o -p 9999
 
 **PYTHON**
+
   $ cd /path/to/soliditybank/ultra
   
   $ python3 -m http.server 9999
@@ -30,6 +30,7 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
   // On Windows, try "python -m http.server" or "py -3 -m http.server"
 
   **PHP**
+  
   $ cd /path/to/soliditybank/ultra
   
   $ php -S localhost:9999
