@@ -1,4 +1,4 @@
-# ULTRA
+# ULTRA (work in progress)
 Military-grade security for your onchain transactions.
 
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer):
@@ -49,4 +49,4 @@ Insufficient ether in your address to pay the network fee.
 Transaction nonce is already used. Check the current nonce of your address before signing the transaction.
 
 ## ethers.js library
-'/lib/ethers.min.js' is a copy of the code on https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js
+'/lib/ethers.min.js' is a copy of https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js
