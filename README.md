@@ -9,7 +9,7 @@ Step 1. A local web server is needed to run the web application.
 
 Step 2. Open the 'index.html' file on a browser offline. Choose an action:
   - 'keygen.html' generates a - truly random - private key and its address.
-  - 'wallet.html' offers various ways to create a new wallet. This wallet is stored locally in your browser and will be used any time you sign a transaction.
+  - 'wallet.html' creates a new wallet or recover an old one from the private key, the passphrase or the seed. This wallet is stored locally in your browser and will be used any time you sign a transaction.
   - 'sign.html' creates and signs a transaction with your stored wallet. A QR of the signature is generated.
 
 ### How to start a server
