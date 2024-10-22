@@ -1,5 +1,5 @@
 # ULTRA (work in progress)
-Military-grade security for your onchain transactions.
+Military-grade security for your onchain operations.
 
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer):
 Step 1. A local web server is needed to run the web application.
