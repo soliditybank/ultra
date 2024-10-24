@@ -237,7 +237,7 @@ footer > span > a:hover {
 <div class="box">
 <span>Public Key (uncompressed)</span>
 <span id="public_key"></span>
-<span id="copy_pubkey" class="copy">Copy Public Key</span>
+<span id="copy_public_key" class="copy">Copy Public Key</span>
 </div>
 <div class="box">
 <span>Bitcoin address</span>
@@ -339,21 +339,21 @@ function confirm() {
 	copy_private_key_btn.addEventListener("click", copy_private_key);
 	function copy_private_key() {
 		navigator.clipboard.writeText(private_key);
-		copy_private_key_btn.value = "Copied!";
+		copy_private_key_btn.innerHTML = "Copied!";
 		setTimeout(() => {
-			copy_private_key_btn.value = "Copy Private Key";
+			copy_private_key_btn.innerHTML = "Copy Private Key";
 		}, 2000);
 	}
 	
 	// Copy Public Key
-	let copy_pubkey_btn = document.getElementById("copy_pubkey");
-	copy_pubkey_btn.addEventListener("click", copy_pubkey);
-	function copy_pubkey() {
-		let copyText = document.getElementById("copy_pubkey");
+	let copy_public_key_btn = document.getElementById("copy_pubkey");
+	copy_public_key_btn.addEventListener("click", copy_public_key);
+	function copy_public_key() {
+		let copyText = document.getElementById("copy_public_key");
 		navigator.clipboard.writeText(public_key);
-		copy_pubkey_btn.value = "Copied!";
+		copy_public_key_btn.innerHTML = "Copied!";
 		setTimeout(() => {
-			copy_pubkey_btn.value = "Copy Public Key";
+			copy_public_key_btn.innerHTML = "Copy Public Key";
 		}, 2000);
 	}
 	
@@ -363,9 +363,9 @@ function confirm() {
 	function copy_btc_address() {
 		let copyText = document.getElementById("copy_btc_address");
 		navigator.clipboard.writeText(bitcoin_address);
-		copy_btc_address_btn.value = "Copied!";
+		copy_btc_address_btn.innerHTML = "Copied!";
 		setTimeout(() => {
-			copy_btc_address_btn.value = "Copy Bitcoin Address";
+			copy_btc_address_btn.innerHTML = "Copy Bitcoin Address";
 		}, 2000);
 	}
 	
@@ -375,9 +375,9 @@ function confirm() {
 	function copy_eth_address() {
 		let copyText = document.getElementById("copy_eth_address");
 		navigator.clipboard.writeText(ethereum_address_from_private_key);
-		copy_eth_address_btn.value = "Copied!";
+		copy_eth_address_btn.innerHTML = "Copied!";
 		setTimeout(() => {
-			copy_eth_address_btn.value = "Copy Ethereum Address";
+			copy_eth_address_btn.innerHTML = "Copy Ethereum Address";
 		}, 2000);
 	}
 }
