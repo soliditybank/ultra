@@ -339,9 +339,9 @@ function confirm() {
 	copy_private_key_btn.addEventListener("click", copy_private_key);
 	function copy_private_key() {
 		navigator.clipboard.writeText(private_key);
-		copy_private_btn.value = "Copied!";
+		copy_private_key_btn.value = "Copied!";
 		setTimeout(() => {
-			copy_private_btn.value = "Copy Private Key";
+			copy_private_key_btn.value = "Copy Private Key";
 		}, 2000);
 	}
 	
@@ -377,7 +377,7 @@ function confirm() {
 		navigator.clipboard.writeText(ethereum_address_from_private_key);
 		copy_eth_address_btn.value = "Copied!";
 		setTimeout(() => {
-			copy_eth_address.value = "Copy Ethereum Address";
+			copy_eth_address_btn.value = "Copy Ethereum Address";
 		}, 2000);
 	}
 }
