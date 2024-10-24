@@ -19,10 +19,10 @@ In the browser :
 - $ cd ./ultra
 - $ python3 -m http.server 9999
 - On Windows, try "python -m http.server" or "py -3 -m http.server"
-- 
-  **PHP**
-  -  $ cd ./ultra
-  -  $ php -S localhost:9999
+
+**PHP**
+-  $ cd ./ultra
+-  $ php -S localhost:9999
 
 ## IMPORTANT
 Your address must be funded with enough ether to cover the network fee.
