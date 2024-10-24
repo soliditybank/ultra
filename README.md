@@ -2,13 +2,13 @@
 Military-grade security for your onchain operations.
 
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer):
-Step 1. A local web server is needed to run the web application.
+In the terminal:
   - $ mkdir soliditybank && cd soliditybank
   - $ git clone https://github.com/soliditybank/ultra.git
   - $ npx http-server ./ultra -o -p 9999
   - It will prompt you to install the 'http-server' package if it isn't already installed.
 
-Step 2. Open the 'index.html' file on a browser offline. Choose an action:
+In the browser:
   - 'keygen.html' generates a - truly random - private key and its address.
   - 'wallet.html' creates a new wallet or recover an old one from the private key, the passphrase or the seed. This wallet is stored locally in your browser and will be used any time you sign a transaction.
   - 'sign.html' creates and signs a transaction with your stored wallet. A QR of the signature is generated.
