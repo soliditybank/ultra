@@ -339,7 +339,10 @@ function confirm() {
 	copy_private_key_btn.addEventListener("click", copy_private_key);
 	function copy_private_key() {
 		navigator.clipboard.writeText(private_key);
-		alert("Private Key has been copied to clipboard. Keep it safe.");
+		copy_private_btn.value = "Copied!";
+		setTimeout(() => {
+			copy_private_btn.value = "Copy Private Key";
+		}, 2000);
 	}
 	
 	// Copy Public Key
@@ -348,7 +351,10 @@ function confirm() {
 	function copy_pubkey() {
 		let copyText = document.getElementById("copy_pubkey");
 		navigator.clipboard.writeText(public_key);
-		alert("Public Key has been copied to clipboard.");
+		copy_pubkey_btn.value = "Copied!";
+		setTimeout(() => {
+			copy_pubkey_btn.value = "Copy Public Key";
+		}, 2000);
 	}
 	
 	// Copy Bitcoin Address
@@ -357,7 +363,10 @@ function confirm() {
 	function copy_btc_address() {
 		let copyText = document.getElementById("copy_btc_address");
 		navigator.clipboard.writeText(bitcoin_address);
-		alert("Bitcoin address has been copied to clipboard.");
+		copy_btc_address_btn.value = "Copied!";
+		setTimeout(() => {
+			copy_btc_address_btn.value = "Copy Bitcoin Address";
+		}, 2000);
 	}
 	
 	// Copy Ethereum Address
@@ -366,7 +375,10 @@ function confirm() {
 	function copy_eth_address() {
 		let copyText = document.getElementById("copy_eth_address");
 		navigator.clipboard.writeText(ethereum_address_from_private_key);
-		alert("Ethereum address has been copied to clipboard.");
+		copy_eth_address_btn.value = "Copied!";
+		setTimeout(() => {
+			copy_eth_address.value = "Copy Ethereum Address";
+		}, 2000);
 	}
 }
 </script>
