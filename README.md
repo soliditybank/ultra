@@ -24,16 +24,16 @@ In the browser :
 -  $ cd ./ultra
 -  $ php -S localhost:9999
 
-## IMPORTANT
+### IMPORTANT
 Your address must be funded with enough ether to cover the network fee.
 
 ## FROM ANY DEVICE (e.g. your phone):
 - Go to https://soliditybank.com/ultra and scan the QR. Or copy/paste the signature.
 - Execute the transaction and wait for confirmation.
 
-## Possible Issues
+### Possible Issues
 - Insufficient ether in your address to pay the network fee.
 - Transaction nonce is already used. Check the current nonce of your address before signing the transaction.
 
-## ethers.js library
+### ethers.js library
 '/lib/ethers.min.js' is a copy of https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js
