@@ -20,6 +20,8 @@ Step 2. Open the 'index.html' file on a browser offline. Choose an action:
 **NODEJS**
 
   $ npx http-server /path/to/soliditybank/ultra -o -p 9999
+  
+  // It will prompt you to install the 'http-server' package if it isn't already installed.
 
 **PYTHON**
 
