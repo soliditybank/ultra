@@ -1,17 +1,241 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
-<title>SolidityBank - Create wallet</title>
+<title>SolidityBank - Create a wallet</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+<meta name="description" content="Create a wallet from a private key, 12 words or seed.">
+<style rel="stylesheet" type="text/css">
+body {
+	margin:0;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+header {
+	position: sticky;
+	top: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	font-family: sans-serif;
+	background-color: #f8f8f8;
+	color: #000;
+	height: 50px;
+	border-bottom: 1px solid #e0e0e0;
+	box-sizing: border-box;
+	z-index: 2;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+header > a {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	text-decoration: none;
+	color: #000;
+	min-width: 60px;
+}
+header > a:nth-child(2) {
+	font-size: 1.8rem;
+}
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: sans-serif;
+	margin-bottom: 40px;
+}
+main > div {
+	margin: 5px 0;
+}
+footer {
+	position: fixed;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 30px;
+	bottom: 0;
+	background-color: #000;
+	color: #eee;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 0.9rem;
+}
+footer > span {
+	width: 150px;
+	text-align: center;
+}
+footer > span > a {
+	text-decoration: none;
+	color: #fff;
+}
+footer > span > a:hover {
+	text-decoration: underline;
+}
+#create_btn {
+	width: 200px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	font-family: sans-serif;
+	cursor: pointer;
+	background-color: #eee;
+}
+#create_btn:hover {
+	background-color: #ddd;
+}
+#description {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 20px;
+	font-size: 0.9rem
+}
+#description > span {
+	margin: 5px 0;
+}
+#manual_mnemonic {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+#private_key, #seed {
+	width: 300px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	font-family: sans-serif;
+}
+#option_pk {
+	display: flex;
+}
+#option_phrase {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+}
+#option_seed {
+	display: none;
+}
+#manual_words {
+	margin-right: 10px;
+}
+#wallet_name {
+	width: 300px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	font-family: sans-serif;
+}
+#wallet_option {
+	width: 200px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	font-family: sans-serif;
+	background-color: #f8f8f8;
+}
+#words {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+}
+#words > input {
+	margin: 5px 0;
+}
+</style>
 </head>
 <body>
-<h1>Work in progress...</h1>
+<noscript id="noscript">JavaScript has been disabled in your browser.</noscript>
+<header>
+<a></a>
+<a title="SolidityBank" href="/">Create a Wallet</a>
+<a></a>
+</header>
+<main>
+<div id="description">
+<span>Choose how to create your wallet :</span>
+<span><b>Private Key :</b> Use a random 32 bytes private key (Standard)</span>
+<span><b>Mnemonic :</b> Randomly select 12 words from a list of 2048 words. It's standard and used by many wallet providers.</span>
+<span><b>Seed :</b> Think of it as a password with spaces allowed. Make it impossible to guess. </span>
+</div>
+<div>
+<select id="wallet_option">
+<option value="pk">Private Key</option>
+<option value="phrase">Mnemonic</option>
+<option value="seed">Seed</option>
+</select>
+</div>
+<div id="option_pk">
+<span><input type="text" id="private_key" placeholder="Private Key"></span>
+</div>
+<div id="option_phrase">
+<span id='manual_mnemonic'><input type='checkbox' id='manual_words' name='manual_words'><label for='manual_words'>Input words manually</label></span>
+<span id="words">
+<input type='text' id='w1' placeholder='word 1'><input type='text' id='w2' placeholder='word 2'><input type='text' id='w3' placeholder='word 3'><input type='text' id='w4' placeholder='word 4'><input type='text' id='w5' placeholder='word 5'><input type='text' id='w6' placeholder='word 6'><input type='text' id='w7' placeholder='word 8'><input type='text' id='w9' placeholder='word 9'><input type='text' id='w10' placeholder='word 10'><input type='text' id='w11' placeholder='word 11'><input type='text' id='w12' placeholder='word 12'>
+</span>
+</div>
+<div id="option_seed">
+<span><input type='text' id='seed' placeholder='Seed'><span>
+</div>
+<div><input type="text" id="wallet_name" placeholder="Wallet name"></div>
+<div><input type="button" id="create_btn" value="Create wallet"></div>
+</main>
+<footer>
+<span>&copy; SolidityBank</span>
+<span><a href="/ultra">Back to Ultra</a></span>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script type="module">
 import { ethers } from "/lib/ethers.min.js";
 
+$(document).ready(() => {
+	$("#wallet_option").change(() => {
+		let op = $("#wallet_option").val();
+		if (op === "pk") {
+			$("#option_phrase").css("display","none");
+			$("#words").css("display","none");
+			$("#option_seed").css("display","none");
+			$("#option_pk").css("display","flex");
+		} else if (op === "phrase") {
+			$("#option_seed").css("display","none");
+			$("#option_pk").css("display","none");
+			$("#option_phrase").css("display","flex");
+			$("#words").css("display","none");
+		} else {
+			$("#option_phrase").css("display","none");
+			$("#words").css("display","none");
+			$("#option_pk").css("display","none");
+			$("#option_seed").css("display","flex");
+		}
+	});
+	$("#manual_words").change(() => {
+		let isChecked = $("#manual_words").prop("checked");
+		console.log(isChecked);
+		if (isChecked) {
+			$("#words").css("display","flex");
+		} else {
+			$("#words").css("display","none");
+		}
+	});
+	$("#create_btn").click(() => {
+		if ($("#wallet_name").val() !== "") {
+			
+		} else {
+			
+		}
+	});
+});
 </script>
 </body>
 </html>
