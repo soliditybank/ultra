@@ -199,42 +199,50 @@ footer > span > a:hover {
 <script type="module">
 import { ethers } from "/lib/ethers.min.js";
 
-$(document).ready(() => {
-	$("#wallet_option").change(() => {
-		let op = $("#wallet_option").val();
-		if (op === "pk") {
-			$("#option_phrase").css("display","none");
-			$("#words").css("display","none");
-			$("#option_seed").css("display","none");
-			$("#option_pk").css("display","flex");
-		} else if (op === "phrase") {
-			$("#option_seed").css("display","none");
-			$("#option_pk").css("display","none");
-			$("#option_phrase").css("display","flex");
-			$("#words").css("display","none");
-		} else {
-			$("#option_phrase").css("display","none");
-			$("#words").css("display","none");
-			$("#option_pk").css("display","none");
-			$("#option_seed").css("display","flex");
-		}
-	});
-	$("#manual_words").change(() => {
-		let isChecked = $("#manual_words").prop("checked");
-		console.log(isChecked);
-		if (isChecked) {
-			$("#words").css("display","flex");
-		} else {
-			$("#words").css("display","none");
-		}
-	});
-	$("#create_btn").click(() => {
-		if ($("#wallet_name").val() !== "") {
-			
-		} else {
-			
-		}
-	});
+let wallet_option = document.getElementById("wallet_option");
+let option_phrase = document.getElementById("option_phrase");
+let words = document.getElementById("words");
+let option_seed = document.getElementById("option_seed");
+let option_pk = document.getElementById("option_pk");
+wallet_option.addEventListener("change", () => {
+	let op = wallet_option.value;
+	if (op === "pk") {
+		option_phrase.style.display = "none";
+		words.style.display = "none";
+		option_seed.style.display = "none";
+		option_pk.style.display = "flex";
+	} else if (op === "phrase") {
+		words.style.display = "none";
+		option_seed.style.display = "none";
+		option_pk.style.display = "none";
+		option_phrase.style.display = "flex";
+	} else {
+		words.style.display = "none";
+		option_pk.style.display = "none";
+		option_phrase.style.display = "none";
+		option_seed.style.display = "flex";
+	}
+});
+	
+let manual_words = document.getElementById("manual_words");
+manual_words.addEventListener("change", () => {
+	let isChecked = manual_words.getAttributeNode("checked").value;
+	console.log(isChecked);
+	if (isChecked) {
+		words.style.display = "flex";
+	} else {
+		words.style.display = "none";
+	}
+});
+
+let create_btn = document.getElementById("create_btn");
+let wallet_name = document.getElementById("wallet_name");
+create_btn.addEventListener("click", () => {
+	if (wallet_name.value !== "") {
+		
+	} else {
+		
+	}
 });
 </script>
 </body>
