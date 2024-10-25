@@ -28,7 +28,7 @@ In the browser :
 Your address must be funded with enough ether to cover the network fee.
 
 ## FROM ANY DEVICE (e.g. your phone):
-- Go to https://soliditybank.com/ultra and scan the QR. Or copy/paste the signature.
+- Go to https://soliditybank.com/ultra and scan the QR or copy/paste the signature.
 - Execute the transaction and wait for confirmation.
 
 ### Possible Issues
