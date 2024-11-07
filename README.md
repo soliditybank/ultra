@@ -2,7 +2,7 @@
 Military-grade security for your onchain operations.
 
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer) :
-In the terminal (nodejs installed) :
+In the terminal with nodejs installed (any other backend is fine) :
   - $ mkdir soliditybank && cd soliditybank
   - $ git clone https://github.com/soliditybank/ultra.git
   - $ npx http-server ./ultra -o -p 9999
