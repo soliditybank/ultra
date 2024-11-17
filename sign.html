@@ -20,7 +20,58 @@
 <script src="lib/qr_packed.js"></script>
 <script type="module">
 import { ethers } from "/lib/ethers.min.js";
-
+let message = document.getElementById("message");
+let select_tx = document.getElementById("select_tx");
+let ether_box = document.getElementById("ether_box");
+let erc20_box = document.getElementById("erc20_box");
+select_tx.addEventListener("change", () => {
+	switch(select_tx.value) {
+		case 'ether': ether_box.style.display = "flex"; erc20_box.style.display = "none"; break;
+		case 'erc20': ether_box.style.display = "none"; erc20_box.style.display = "flex"; break;
+	}
+});
+let select_method = document.getElementById("select_method");
+let params = document.getElementById("params");
+select_method.addEventListener("change", () => {
+	switch(select_method.value) {
+		case 'ether': params.innerHTML = "<input type='text' id='to' placeholder='To'><input type='text' id='amount' placeholder='Amount'>"; break;
+		case 'erc20_transfer': params.innerHTML = "<input type='text' id='erc20' placeholder='ERC20 address'><input type='text' id='to' placeholder='To'><input type='text' id='amount' placeholder='Amount'>"; break;
+		case 'erc20_approve': params.innerHTML = "<input type='text' id='erc20' placeholder='ERC20 address'><input type='text' id='spender' placeholder='Spender'><input type='text' id='amount' placeholder='Amount'>"; break;
+		case 'erc20_transferFrom': params.innerHTML = "<input type='text' id='erc20' placeholder='ERC20 address'><input type='text' id='from' placeholder='From'><input type='text' id='to' placeholder='To'><input type='text' id='amount' placeholder='Approved amount'>"; break;
+	}
+});
+if (sessionStorage.getItem("test_wallet") !== null) {
+	let wallet = sessionStorage.getItem("test_wallet");
+	console.log(wallet);
+	let w = ethers.Wallet.fromEncryptedJsonSync(sessionStorage.getItem("test_wallet"), "123");
+	console.log(w);
+	let sign_btn = document.getElementById("sign_btn");
+	sign_btn.addEventListener("click", async () => {
+		let nonce = document.getElementById("nonce").value;
+		let from = await w.getAddress();
+		let to = document.getElementById("to").value;
+		let amount = document.getElementById("amount").value;
+		let txRequest = {
+			chainId: ethers.toBeHex(11155111),
+			from: from,
+			to: to,
+			value: ethers.toBeHex(0),
+			data: "0x",
+			gasLimit: ethers.toBeHex(21000),
+	//		gasPrice: ,
+			maxFeePerGas: ethers.toBeHex(ethers.parseUnits("0.03", 9)),
+			maxPriorityFeePerGas: ethers.toBeHex(0),
+			nonce: ethers.toBeHex(nonce),
+			type: 2
+		}
+		console.log(txRequest);
+		let signed_tx = await w.signTransaction(txRequest);
+		console.log(signed_tx);
+		
+	});
+} else {
+	message.innerHTML = "Create a disposable wallet <a style='color:#fff; margin: 0 5px;' href='/ultra/wallet'>here</a>, available for this session only.";
+}
 </script>
 </body> 
 </html>
