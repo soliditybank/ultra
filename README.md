@@ -6,7 +6,7 @@ In the terminal with nodejs installed (any other backend is fine) :
   - $ mkdir soliditybank && cd soliditybank
   - $ git clone https://github.com/soliditybank/ultra.git
   - $ npx http-server ./ultra -o -p 9999
-  - It will prompt you to install the 'http-server' package if it isn't already installed.
+  - Packages 'http-server' and 'qrcode' are required.
 
 In the browser :
   - 'keygen.html' generates a - truly random - private key and its address.
