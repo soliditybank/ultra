@@ -277,30 +277,90 @@ font-size: 1.1rem;
 <a href="/"></a>
 </header>
 <main>
-
-</main>
-<h1>Work in progress...</h1>
-<div>
+<div id="message"></div>
+<div id="title">
+<h1>Sign a transaction</h1>
+</div>
+<p style="padding: 0 10px; font-size: 0.9rem;">This is the online version of Ultra. Download the repository <a style="color:#00f" href="https://github.com/soliditybank/ultra" target="_blank">here</a>. When offline, some parameters need to be looked up online, like the current nonce of your address or the current gas price on the network of your choice.</p>
+<select id="select_tx">
+<option value="ether">Send Ether</option>
+<option value="erc20">ERC20 method</option>
+</select>
+<div id="ether_box">
 <input type="text" id="to" placeholder="To">
-<input type="text" id="value" placeholder="Value">
+<input type="text" id="amount" placeholder="Amount">
+</div>
+<div id="erc20_box">
+<select id="select_method">
+<option value="erc20_transfer">ERC20 transfer</option>
+<option value="erc20_approve">ERC20 approve</option>
+<option value="erc20_transferFrom">ERC20 transferFrom</option>
+</select>
+<div id="params">
+<input type="text" id="erc20" placeholder="ERC20 address">
+<input type="text" id="erc20_to" placeholder="To">
+<input type="text" id="erc20_amount" placeholder="Amount">
+</div>
+</div>
+<select id="select_network">
+<option value="ethereum">Ethereum</option>
+<option value="base">Base</option>
+<option value="avalanche">Avalanche</option>
+<option value="optimism">Optimism</option>
+<option value="polygon">Polygon</option>
+</select>
 <input type="text" id="nonce" placeholder="Nonce">
-</div>
-<div id="qr_signature">
-<img id="qr_img" width="300" height="300" alt="QR">
-<span>Scan the QR to share the signature :</span>
+<input type="text" id="gasLimit" placeholder="Gas Limit" readonly>
+<input type="text" id="maxFeePerGas" placeholder="Max Fee per Gas (Gwei)">
+<input type="button" id="sign_btn" value="Sign Transaction">
+<div id="QR_signature">
+<span>QR of the signature</span>
+<img id="QR" width="200" height="200" alt="QR" src="../images/white_200x200.png">
 <code id="signature"></code>
+<input type="button" id="copy_signature" value="Copy signature">
 </div>
+<hr>
+<div id="data">
+<div style="width: 100%; text-align: center; font-size: 0.8rem;">
+<span>The nonce is a parameter that changes every time you make a transaction ( n=n+1 ). Check the nonce of any address here :</span>
+</div>
+<div>
+<span>
+<input type="text" id="address_nonce" placeholder="Address or ENS"></input>
+</span>
+<span>
+<select id="network_nonce">
+<option value="ethereum">Ethereum</option>
+<option value="base">Base</option>
+<option value="avalanche">Avalanche</option>
+</select>
+</span>
+<span>
+<input type="button" id="btn_nonce" value="Get nonce">
+<input type="text" id="getNonce" readonly>
+</span>
+</div>
+</div>
+</main>
+<footer>
+<span><a style="text-decoration:none;color:#000" href="/unix-time">&copy; SolidityBank</a></span>
+<span><a href="/ultra">Back to Ultra</a></span>
+</footer>
 <script src="lib/qr_packed.js"></script>
 <script type="module">
 import { ethers } from "/lib/ethers.min.js";
 let message = document.getElementById("message");
-let select_tx = document.getElementById("select_tx");
 let ether_box = document.getElementById("ether_box");
 let erc20_box = document.getElementById("erc20_box");
+let params = document.getElementById("params");
+let gasLimit = ethers.toBeHex(25000);
+let sign_btn = document.getElementById("sign_btn");
+let select_tx = document.getElementById("select_tx");
+document.getElementById("gasLimit").value = "Gas limit : 25,000";
 select_tx.addEventListener("change", () => {
-	switch(select_tx.value) {
-		case 'ether': ether_box.style.display = "flex"; erc20_box.style.display = "none"; break;
-		case 'erc20': ether_box.style.display = "none"; erc20_box.style.display = "flex"; break;
+	switch($("#select_tx").val()) {
+		case 'ether': ether_box.style.display = "flex"; erc20_box.style.display = "none"; gasLimit = ethers.toBeHex(25000); $("#gasLimit").val("Gas limit : 25,000"); break;
+		case 'erc20': ether_box.style.display = "none"; erc20_box.style.display = "flex"; gasLimit = ethers.toBeHex(100000); $("#gasLimit").val("Gas limit : 100,000"); break;
 	}
 });
 let select_method = document.getElementById("select_method");
