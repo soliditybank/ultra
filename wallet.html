@@ -195,54 +195,109 @@ footer > span > a:hover {
 <span>&copy; SolidityBank</span>
 <span><a href="/ultra">Back to Ultra</a></span>
 </footer>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="lib/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script type="module">
-import { ethers } from "/lib/ethers.min.js";
-
-let wallet_option = document.getElementById("wallet_option");
-let option_phrase = document.getElementById("option_phrase");
-let words = document.getElementById("words");
-let option_seed = document.getElementById("option_seed");
-let option_pk = document.getElementById("option_pk");
-wallet_option.addEventListener("change", () => {
-	let op = wallet_option.value;
+import { ethers } from "/js/ethers.min.js";
+$(document).ready(() => {
+$("#wallet_option").change(() => {
+	let op = $("#wallet_option").val();
 	if (op === "pk") {
-		option_phrase.style.display = "none";
-		words.style.display = "none";
-		option_seed.style.display = "none";
-		option_pk.style.display = "flex";
-	} else if (op === "phrase") {
-		words.style.display = "none";
-		option_seed.style.display = "none";
-		option_pk.style.display = "none";
-		option_phrase.style.display = "flex";
+		$("#option_phrase").css("display","none");
+		$("#words").css("display","none");
+		$("#option_pk").css("display","flex");
+	} else if (op === "mnemonic_phrase") {
+		$("#option_pk").css("display","none");
+		$("#option_phrase").css("display","flex");
+		$("#words").css("display","none");
 	} else {
-		words.style.display = "none";
-		option_pk.style.display = "none";
-		option_phrase.style.display = "none";
-		option_seed.style.display = "flex";
+		$("#option_phrase").css("display","none");
+		$("#words").css("display","none");
+		$("#option_pk").css("display","none");
 	}
 });
-	
-let manual_words = document.getElementById("manual_words");
-manual_words.addEventListener("change", () => {
-	let isChecked = manual_words.getAttributeNode("checked").value;
-	console.log(isChecked);
+$("#manual_words").change(() => {
+	let isChecked = $("#manual_words").prop("checked");
 	if (isChecked) {
-		words.style.display = "flex";
+		$("#words").css("display","flex");
+		$("#input_phrase").css("display","none");
 	} else {
-		words.style.display = "none";
+		$("#words").css("display","none");
+		$("#input_phrase").css("display","flex");
 	}
 });
-
-let create_btn = document.getElementById("create_btn");
-let wallet_name = document.getElementById("wallet_name");
-create_btn.addEventListener("click", () => {
-	if (wallet_name.value !== "") {
-		
+$("#create_btn").click(async () => {
+	let wallet_name = $("#wallet_name").val() || "test_wallet";
+	if (wallet_name === "") {
+		$("#message_text").text("Wallet name is empty");
+		$("#message").css("background-color","#a00");
+		$("#message").css("display","flex");
+	} else if (wallet_name.length > 15) {
+		$("#message_text").text("Wallet name is too long");
+		$("#message").css("background-color","#a00");
+		$("#message").css("display","flex");
 	} else {
-		
+		let wallet_option = $("#wallet_option").val();
+		if (wallet_option == "pk") {
+			let pk = $("#private_key").val();
+			if (pk === "") {
+				$("#message_text").text("Invalid private key");
+				$("#message").css("background-color","#a00");
+				$("#message").css("display","flex");
+			} else {
+				let wallet = new ethers.Wallet(pk);
+				let w_encrypted = await wallet.encrypt("123");
+				console.log(w_encrypted);
+				sessionStorage.setItem(wallet_name, w_encrypted);
+				let w = ethers.Wallet.fromEncryptedJsonSync(sessionStorage.getItem("test_wallet"), "123");
+				let address = await w.getAddress();
+				$("#address").text(address);
+				$("#success").css("display","flex");
+			}
+		} else if (wallet_option == "mnemonic_phrase") {
+			let isChecked = $("#manual_words").prop("checked");
+			let phrase;
+			if (isChecked) {
+				let w1 = $("#w1").val() || "";
+				let w2 = $("#w2").val() || "";
+				let w3 = $("#w3").val() || "";
+				let w4 = $("#w4").val() || "";
+				let w5 = $("#w5").val() || "";
+				let w6 = $("#w6").val() || "";
+				let w7 = $("#w7").val() || "";
+				let w8 = $("#w8").val() || "";
+				let w9 = $("#w9").val() || "";
+				let w10 = $("#w10").val() || "";
+				let w11 = $("#w11").val() || "";
+				let w12 = $("#w12").val() || "";
+				phrase = w1 + " " + w2 + " " + w3 + " " + w4 + " " + w5 + " " + w6 + " " + w7 + " " + w8 + " " + w9 + " " + w10 + " " + w11 + " " + w12;
+			} else {
+				phrase = $("#phrase").val();
+			}
+			try {
+				let wallet = ethers.Wallet.fromPhrase(phrase);
+				let w_encrypted = await wallet.encrypt("123");
+				console.log(w_encrypted);
+				sessionStorage.setItem(wallet_name, w_encrypted);
+				let w = ethers.Wallet.fromEncryptedJsonSync(sessionStorage.getItem("test_wallet"), "123");
+				let address = await w.getAddress();
+				$("#address").text(address);
+				$("#success").css("display","flex");
+			} catch(e) {
+				$("#message_text").text(e);
+				$("#message").css("background-color","#a00");
+				$("#message").css("display","flex");
+				$("#success").css("display","none");
+			}
+		} else {
+			console.log("Error. No wallet method specified.")
+		}
 	}
+});
+$("#words > input").focus(() => {
+	$("#message").css("display","none");
+});
+$("#phrase").focus(() => {
+	$("#message").css("display","none");
 });
 </script>
 </body>
