@@ -1,5 +1,5 @@
 # ULTRA (work in progress)
-Military-grade security for your onchain operations.
+Military-grade security for your onchain operations. Intended for offline use. Check the online version https://soliditybank.com/ultra
 
 ## FROM A SECURE COMPUTER (e.g. air-gapped computer) :
 In the terminal with nodejs installed (any other backend is fine) :
